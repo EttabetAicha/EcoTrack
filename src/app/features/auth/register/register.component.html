@@ -1,0 +1,107 @@
+<!-- Registration Form Container -->
+<div class="min-h-screen bg-green-50 py-12 px-4 sm:px-6 lg:px-8 flex justify-center items-center">
+  <div class="max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
+    <!-- Form Header -->
+    <div class="px-8 py-6 border-b border-gray-200 text-center bg-green-100">
+      <h2 class="text-3xl font-extrabold text-green-800">Créer un compte</h2>
+      <p class="mt-2 text-gray-600">Rejoignez notre communauté de recyclage</p>
+    </div>
+
+    <!-- Form Content -->
+    <form class="px-8 py-6 space-y-6" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <!-- Profile Picture Section -->
+      <div class="flex flex-col items-center space-y-4">
+        <div class="relative w-32 h-32 rounded-full overflow-hidden bg-gray-200 border-4 border-green-300 shadow-lg">
+          <img *ngIf="imagePreview" [src]="imagePreview" class="w-full h-full object-cover" alt="Profile Preview" />
+          <div *ngIf="!imagePreview" class="w-full h-full flex items-center justify-center text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <label class="cursor-pointer px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all">
+            <span>Choisir une photo</span>
+            <input type="file" (change)="onFileSelected($event)" accept="image/*" class="hidden" />
+          </label>
+          <button *ngIf="imagePreview" type="button" (click)="removeImage()" class="text-red-600 hover:text-red-800">
+            Supprimer
+          </button>
+        </div>
+      </div>
+
+      <!-- Input Fields -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Prénom</label>
+          <input type="text" formControlName="firstName" class="mt-1 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Nom</label>
+          <input type="text" formControlName="lastName" class="mt-1 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" formControlName="email" class="mt-1 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Mot de passe</label>
+          <input type="password" formControlName="password" class="mt-1 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6" >
+        <div>
+        <label class="block text-sm font-medium text-gray-700">Adresse</label>
+        <input type="text" formControlName="streetAddress" placeholder="Rue et numéro" class="mt-1 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Ville</label>
+        <input type="text" formControlName="city" class="mt-1 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+      </div>
+      </div>
+
+
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Numéro de téléphone</label>
+          <input type="tel" formControlName="phone" class="mt-1 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Date de naissance</label>
+          <div class="relative">
+            <input
+              type="date"
+              formControlName="birthDate"
+              class="mt-1 block w-full h-10 px-3 py-2 focus:outline-none focus:ring-0 shadow-sm bg-white  border-gray-300 rounded-lg text-gray-400
+
+
+                    "
+              placeholder="JJ/MM/AAAA"
+            />
+            <!-- Calendar Icon -->
+
+          </div>
+          </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="pt-4">
+        <button type="submit" class="w-full py-3 px-4 rounded-lg text-lg font-medium text-white bg-green-600 hover:bg-green-700 transition-all">
+          S'inscrire
+        </button>
+      </div>
+
+      <!-- Login Link -->
+      <div class="text-center text-sm text-gray-600">
+        Déjà inscrit ?
+        <a routerLink="/login" class="font-medium text-green-600 hover:text-green-500">Se connecter</a>
+      </div>
+    </form>
+  </div>
+</div>
+
