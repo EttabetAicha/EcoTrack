@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -15,6 +14,9 @@ import { AuthService } from '../../../core/services/auth.service';
 export class RegisterComponent {
   registerForm: FormGroup;
   imagePreview: string | null = null;
+  errorMessage: string | null = null;
+  originalFileName: string | null = null;
+
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
@@ -23,8 +25,6 @@ export class RegisterComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       streetAddress: ['', Validators.required],
-      postalCode: ['', Validators.required],
-      city: ['', Validators.required],
       phone: ['', Validators.required],
       birthDate: ['', Validators.required],
       profilePicture: [null]
@@ -34,9 +34,16 @@ export class RegisterComponent {
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
+      if (!file.type.startsWith('image/')) {
+        this.errorMessage = 'Only image files are allowed';
+        return;
+      }
+      // Store original filename
+      this.originalFileName = file.name;
       const reader = new FileReader();
       reader.onload = () => {
         this.imagePreview = reader.result as string;
+        this.registerForm.patchValue({ profilePicture: this.originalFileName });
       };
       reader.readAsDataURL(file);
     }
@@ -49,15 +56,14 @@ export class RegisterComponent {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.registerForm.valid) {
-      const success = this.authService.register(this.registerForm.value);
+      const success = await this.authService.register(this.registerForm.value);
       if (success) {
         console.log('Registration successful');
         this.router.navigate(['/login']);
       } else {
         console.error('Registration failed');
-        // Handle registration failure (e.g., show error message)
       }
     }
   }

@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "id": "1839e72a-c131-4547-84ac-d555b53e4912",
+      "firstName": "Est et velit tempo",
+      "lastName": "Odit aut amet iure ",
+      "email": "sewimusut@mailinator.com",
+      "password": "$2a$10$Z9b01WERzoJSH94irpRU5eEi47z3q.JHsm4QzQQacPkNzp84e.ALW",
+      "streetAddress": "Voluptas vel sunt et",
+      "phone": "+1 (364) 822-9227",
+      "birthDate": "2003-04-22",
+      "profilePicture": null,
+      "userType": "particular",
+      "createdAt": "2025-02-05T10:44:32.370Z"
+    },
+    {
+      "id": "34b35e50-349b-4327-bf43-709b3a89acc2",
+      "firstName": "Qui ratione facere u",
+      "lastName": "Perferendis placeat",
+      "email": "vuxezutily@mailinator.com",
+      "password": "$2a$10$oQHT6AJzn37rgyOQSqcb9.95KUhwCdm7PwuJVC4pQJv7Rlbirn//C",
+      "streetAddress": "Explicabo Amet lau",
+      "phone": "+1 (867) 958-9121",
+      "birthDate": "1982-07-16",
+      "profilePicture": "3L3A1144.JPG",
+      "userType": "particular",
+      "createdAt": "2025-02-05T11:05:23.336Z"
+    },
+    {
+      "id": "ece68174-ae91-4b2a-b5f2-fd5fac062dd5",
+      "firstName": "aicha",
+      "lastName": "ettabet",
+      "email": "aicha@gmail.com",
+      "password": "$2a$10$zBgzFBY7yU7JvJYjanx.n.Q8RCOlzaj3Ihqp7WdgA4.YTU6b.Gy/6",
+      "streetAddress": "23655,maroc,youssoufia",
+      "phone": "0602125487",
+      "birthDate": "2001-12-15",
+      "profilePicture": "3L3A1146.JPG",
+      "userType": "particular",
+      "createdAt": "2025-02-05T11:13:51.411Z"
+    }
+  ]
+}
