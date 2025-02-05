@@ -73,7 +73,9 @@
           Se connecter
         </button>
       </div>
-
+      <div *ngIf="loginError" class="text-red-600 text-sm text-center">
+        {{ loginError }}
+      </div>
       <!-- Register Link -->
       <div class="text-center text-sm text-gray-600">
         Pas encore de compte ?

@@ -38,6 +38,19 @@
       "profilePicture": "3L3A1146.JPG",
       "userType": "particular",
       "createdAt": "2025-02-05T11:13:51.411Z"
+    },
+    {
+      "id": "90aea4d8-8899-4354-95eb-6ad7dba2a272",
+      "firstName": "aicha",
+      "lastName": "ettabet",
+      "email": "aicha@gmail.com",
+      "password": "$2a$10$SFjnyl7fMngFxz7G3XgpXeuTiadYAV4LibwWBemsHpAVgdBU4hDnO",
+      "streetAddress": "maroc,258,youssoufia",
+      "phone": "0602125487",
+      "birthDate": "2000-12-15",
+      "profilePicture": "téléchargement (17).jpg",
+      "userType": "particular",
+      "createdAt": "2025-02-05T19:30:33.553Z"
     }
   ]
 }

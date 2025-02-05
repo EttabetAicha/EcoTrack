@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -81,8 +82,11 @@ export class RegisterComponent {
         console.log('Registration successful');
         this.router.navigate(['/login']);
       } else {
-        console.error('Registration failed');
-      }
+        Swal.fire({
+          icon: 'error',
+          title: 'Registration Error',
+          text: 'Email already in use',
+        });      }
     }
   }
 }

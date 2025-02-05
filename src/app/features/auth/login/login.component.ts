@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,9 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  loginError: string | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -21,10 +23,15 @@ export class LoginComponent {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-      // Handle login submission
+      const { email, password } = this.loginForm.value;
+      const success = await this.authService.login(email, password);
+      if (success) {
+        this.router.navigate(['/']);
+      } else {
+        this.loginError = 'Invalid email or password. Please try again.';
+      }
     }
   }
 }

@@ -1,10 +1,10 @@
 <div class="min-h-screen bg-green-50 py-12 px-4 sm:px-6 lg:px-8 flex justify-center items-center">
-  <div class="max-w-2xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
-    <div class="px-8 py-6 border-b border-gray-200 text-center bg-green-100">
+  <div class="max-w-lg w-full bg-white rounded-2xl shadow-2xl overflow-hidden"> <!-- Reduced max-width -->
+    <div class="px-6 py-4 border-b border-gray-200 text-center bg-green-100"> <!-- Adjusted padding -->
       <h2 class="text-3xl font-extrabold text-green-800">Créer un compte</h2>
       <p class="mt-2 text-gray-600">Rejoignez notre communauté de recyclage</p>
     </div>
-    <form class="px-8 py-6 space-y-6" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <form class="px-6 py-4 space-y-6" [formGroup]="registerForm" (ngSubmit)="onSubmit()"> <!-- Adjusted padding -->
       <div class="flex flex-col items-center space-y-4">
         <div class="relative w-32 h-32 rounded-full overflow-hidden bg-gray-200 border-4 border-green-300 shadow-lg">
           <img *ngIf="imagePreview" [src]="imagePreview" class="w-full h-full object-cover" alt="Profile Preview" />
@@ -58,13 +58,12 @@
           </div>
         </div>
       </div>
-        <div class="col-end-2">
+      <div>
         <label class="block text-sm font-medium text-gray-700">Adresse</label>
-        <input type="text" formControlName="streetAddress" placeholder="Rue , numéro , ville  "   class="mt-1 px-3 py-2 block w-full h-10 rounded-lg  text-gray-700 border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+        <input type="text" formControlName="streetAddress" placeholder="Rue , numéro , ville" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg text-gray-700 border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
         <div [@errorState]="registerForm.get('streetAddress')?.invalid && registerForm.get('streetAddress')?.touched ? 'visible' : 'hidden'" class="text-red-600 text-sm">
           Adresse est requis et doit être valide.
         </div>
-
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -78,16 +77,12 @@
         <div>
           <label class="block text-sm font-medium text-gray-700">Date de naissance</label>
           <div class="relative">
-            <input
-              type="date"
-              formControlName="birthDate"
-              class="mt-1 block w-full h-10 px-3 py-2 focus:outline-none focus:ring-0 shadow-sm bg-white  border-gray-300 rounded-lg text-gray-400"
-            />
+            <input type="date" formControlName="birthDate" class="mt-1 block w-full h-10 px-3 py-2 focus:outline-none focus:ring-0 shadow-sm bg-white border-gray-300 rounded-lg text-gray-400" />
             <div [@errorState]="registerForm.get('birthDate')?.invalid && registerForm.get('birthDate')?.touched ? 'visible' : 'hidden'" class="text-red-600 text-sm">
               Date de naissance est requise.
             </div>
           </div>
-          </div>
+        </div>
       </div>
 
       <div class="pt-4">
@@ -102,4 +97,3 @@
     </form>
   </div>
 </div>
-
