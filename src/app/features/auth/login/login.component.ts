@@ -28,7 +28,7 @@ export class LoginComponent {
       const { email, password } = this.loginForm.value;
       const success = await this.authService.login(email, password);
       if (success) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/particular/dashboard']);
       } else {
         this.loginError = 'Invalid email or password. Please try again.';
       }
