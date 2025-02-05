@@ -1,29 +1,44 @@
-<div class="relative bg-green-50 min-h-screen flex items-center overflow-hidden">
-  <div class="absolute inset-0 overflow-hidden">
-    <img
-      *ngFor="let image of heroImages; let i = index"
-      [src]="image"
-      alt="RecycleHub Background"
-      class="w-full h-full object-cover opacity-0 absolute transition-opacity duration-1000 ease-in-out"
-      [ngClass]="{ 'opacity-100': currentImageIndex === i }"
-    />
+<div class="relative min-h-screen flex items-center">
+  <!-- Background Images Container -->
+  <div class="absolute inset-0">
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black/60 z-10"></div>
+
+    <!-- Image Slides -->
+    <div class="relative w-full h-full">
+      <img
+        *ngFor="let image of heroImages; let i = index"
+        [src]="image"
+        alt="RecycleHub Background"
+        class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
+        [ngClass]="{ 'opacity-100': currentImageIndex === i, 'opacity-0': currentImageIndex !== i }"
+      />
+    </div>
   </div>
 
-  <div class="container mx-auto px-4 relative z-10">
+  <!-- Content Container -->
+  <div class="container mx-auto px-4 relative z-20">
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <!-- Left Section: Text -->
       <div class="text-white">
-        <h1 class="text-5xl font-bold mb-6 animate-fade-in">
+        <h1 class="text-5xl font-bold mb-6" @fadeOutUp>
           Automatisez la gestion du recyclage
         </h1>
-        <p class="text-xl mb-8 animate-slide-up">
+        <p class="text-xl mb-8" @fadeOutUp>
           Rejoignez notre communauté et participez à la préservation de l'environnement.
         </p>
         <div class="space-x-4">
-          <a [routerLink]="['/register']" class="bg-green-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-green-700 transition duration-300">
+          <button
+            [routerLink]="['/register']"
+            class="bg-green-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-green-700 transition duration-300"
+            [@zoomUpDown]="animationState"
+          >
             S'inscrire
-          </a>
-          <button class="border-2 border-green-600 text-green-600 px-8 py-3 rounded-full hover:bg-green-50 transition duration-300">
+          </button>
+          <button
+            class="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white/10 transition duration-300"
+            [@zoomUpDown]="animationState"
+          >
             En savoir plus
           </button>
         </div>

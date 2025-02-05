@@ -9,10 +9,21 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './landing-page.component.html',
 
   animations: [
-    trigger('fadeInLeft', [
+    trigger('fadeOutLeft', [
       state('hidden', style({ opacity: 0, transform: 'translateX(-30px)' })),
       state('visible', style({ opacity: 1, transform: 'translateX(0)' })),
       transition('hidden => visible', animate('1s ease-out'))
+    ]),
+    trigger('zoomUpDown', [
+      state('start', style({ transform: 'scale(1) translateY(0)' })),
+      state('end', style({ transform: 'scale(1.1) translateY(-10px)' })),
+      transition('start <=> end', animate('2s ease-in-out')),
+    ]),
+    trigger('fadeOutUp', [
+      state('void', style({ opacity: 0, transform: 'translateX(-100%)' })),
+      transition(':enter', [
+        animate('1s ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+      ]),
     ]),
     trigger('cardHover', [
       state('normal', style({ transform: 'scale(1)' })),
@@ -32,7 +43,7 @@ import { Router, RouterModule } from '@angular/router';
   ]
 })
 export class LandingPage implements OnInit {
-
+  animationState = 'start';
 
   testimonials = [
   {
@@ -99,6 +110,9 @@ export class LandingPage implements OnInit {
     this.rotateHeroImages();
     window.addEventListener('scroll', this.handleScroll.bind(this));
     this.startDynamicCounters();
+    setInterval(() => {
+      this.toggleAnimation();
+    }, 2000);
   }
 
   rotateHeroImages() {
@@ -115,6 +129,9 @@ export class LandingPage implements OnInit {
   handleScroll() {
     const scrollPosition = window.scrollY;
     this.parallaxState = scrollPosition > 50 ? 'scrolled' : 'normal';
+  }
+  toggleAnimation() {
+    this.animationState = this.animationState === 'start' ? 'end' : 'start';
   }
 
   startDynamicCounters() {

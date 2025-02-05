@@ -4,12 +4,31 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink]
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  animations: [
+    trigger('errorState', [
+      state('hidden', style({
+        opacity: 0,
+        height: '0px'
+      })),
+      state('visible', style({
+        opacity: 1,
+        height: '*'
+      })),
+      transition('hidden => visible', [
+        animate('300ms ease-in')
+      ]),
+      transition('visible => hidden', [
+        animate('300ms ease-out')
+      ])
+    ])
+  ]
 })
 export class RegisterComponent {
   registerForm: FormGroup;
