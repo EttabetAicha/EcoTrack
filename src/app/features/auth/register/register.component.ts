@@ -17,15 +17,14 @@ export class RegisterComponent {
   errorMessage: string | null = null;
   originalFileName: string | null = null;
 
-
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      streetAddress: ['', Validators.required],
-      phone: ['', Validators.required],
+      streetAddress: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9\s,]+$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^(06|07)\d{8}$/)]],
       birthDate: ['', Validators.required],
       profilePicture: [null]
     });

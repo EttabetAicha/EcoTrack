@@ -29,10 +29,16 @@
         <div>
           <label class="block text-sm font-medium text-gray-700">Prénom</label>
           <input type="text" formControlName="firstName" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+          <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched" class="text-red-600 text-sm">
+            Prénom est requis.
+          </div>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Nom</label>
           <input type="text" formControlName="lastName" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+          <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched" class="text-red-600 text-sm">
+            Nom est requis.
+          </div>
         </div>
       </div>
 
@@ -40,16 +46,24 @@
         <div>
           <label class="block text-sm font-medium text-gray-700">Email</label>
           <input type="email" formControlName="email" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+          <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-red-600 text-sm">
+            Email est requis et doit être valide.
+          </div>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Mot de passe</label>
           <input type="password" formControlName="password" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+          <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-red-600 text-sm">
+            Mot de passe est requis et doit contenir au moins 8 caractères.
+          </div>
         </div>
       </div>
         <div class="col-end-2">
         <label class="block text-sm font-medium text-gray-700">Adresse</label>
         <input type="text" formControlName="streetAddress" placeholder="Rue , numéro , ville  "   class="mt-1 px-3 py-2 block w-full h-10 rounded-lg  text-gray-700 border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
-
+        <div *ngIf="registerForm.get('streetAddress')?.invalid && registerForm.get('streetAddress')?.touched" class="text-red-600 text-sm">
+          Adresse est requis et doit être valide.
+        </div>
 
       </div>
 
@@ -57,6 +71,9 @@
         <div>
           <label class="block text-sm font-medium text-gray-700">Numéro de téléphone</label>
           <input type="tel" formControlName="phone" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+          <div *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched" class="text-red-600 text-sm">
+            Numéro de téléphone est requis et doit commencer par 06 ou 07 et contenir 10 chiffres.
+          </div>
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Date de naissance</label>
@@ -66,6 +83,9 @@
               formControlName="birthDate"
               class="mt-1 block w-full h-10 px-3 py-2 focus:outline-none focus:ring-0 shadow-sm bg-white  border-gray-300 rounded-lg text-gray-400"
             />
+            <div *ngIf="registerForm.get('birthDate')?.invalid && registerForm.get('birthDate')?.touched" class="text-red-600 text-sm">
+              Date de naissance est requise.
+            </div>
           </div>
           </div>
       </div>
