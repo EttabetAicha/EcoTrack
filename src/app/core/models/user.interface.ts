@@ -4,11 +4,14 @@ export interface User {
   password: string;
   firstName: string;
   lastName: string;
-  address: string;
+  address: {
+    street: string;
+    postalCode: string;
+    city: string;
+  };
   phone: string;
   birthDate: string;
   profilePicture?: string;
   userType: 'particular' | 'collector';
   createdAt: string;
-  updatedAt: string;
 }
