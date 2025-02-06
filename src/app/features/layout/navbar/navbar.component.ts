@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+import { User } from '../../../core/models/user.interface';
+import { AuthService } from '../../../core/services/auth.service';
 
 interface MenuItem {
   icon: string;
@@ -23,12 +26,12 @@ export class DashboardLayoutComponent {
   isSidebarOpen = true;
   isDropdownOpen = false;
   isNotificationsOpen = false;
+  currentUser$: Observable<User | null>;
 
-  user = {
-    name: 'John Doe',
-    email: 'john@example.com',
-    profileImage: null,
-  };
+  constructor(private authService: AuthService) {
+    this.currentUser$ = this.authService.currentUser$;
+  }
+
 
   notifications: Notification[] = [
     { id: 1, text: 'New collection request received', time: '5 minutes ago' },
