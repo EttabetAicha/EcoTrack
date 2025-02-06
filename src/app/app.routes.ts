@@ -3,11 +3,11 @@ import { RegisterComponent } from './features/auth/register/register.component';
 import { LandingPage } from './features/landing-page/landing-page.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-  {path:"",component:LandingPage},
+  { path: '', component: LandingPage },
   { path: 'register', component: RegisterComponent },
-  {path:"login",component:LoginComponent},
-  {path:'particular/dashboard',component:DashboardComponent}
-
+  { path: 'login', component: LoginComponent },
+  { path: 'particular/dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
 ];

@@ -85,6 +85,7 @@ export class DashboardLayoutComponent {
   }
 
   logout(): void {
-    console.log('Logging out...');
+    this.authService.logout();
+
   }
 }
