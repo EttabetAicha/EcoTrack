@@ -1,43 +1,64 @@
-<div class="flex-1  flex justify-center items-center">
-  <div class="max-w-3xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
-    <div class="px-6 py-4 border-b border-gray-200 text-center bg-green-100">
-      <h2 class="text-3xl font-extrabold text-green-800">Modifier le Profil</h2>
-      <p class="mt-2 text-gray-600">Mettez à jour vos informations personnelles</p>
+<div class="flex">
+  <div class="flex-1 p-6 flex justify-center items-center">
+    <div class="max-w-4xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-gray-200 text-center bg-green-100">
+        <h2 class="text-3xl font-extrabold text-green-800">Modifier le Profil</h2>
+        <p class="mt-2 text-gray-600">Mettez à jour vos informations personnelles</p>
+      </div>
+      <form class="px-6 py-4 space-y-4" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="profileForm.invalid && profileForm.touched" class="text-center text-red-600 mb-4">
+          Veuillez corriger les erreurs ci-dessous.
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Prénom</label>
+            <input type="text" formControlName="firstName" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+            <div *ngIf="profileForm.get('firstName')?.invalid && profileForm.get('firstName')?.touched" class="text-red-600 text-sm">
+              Prénom est requis.
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Nom</label>
+            <input type="text" formControlName="lastName" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+            <div *ngIf="profileForm.get('lastName')?.invalid && profileForm.get('lastName')?.touched" class="text-red-600 text-sm">
+              Nom est requis.
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" formControlName="email" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+            <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="text-red-600 text-sm">
+              Email est requis et doit être valide.
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Téléphone</label>
+            <input type="tel" formControlName="phone" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+            <div *ngIf="profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched" class="text-red-600 text-sm">
+              Numéro de téléphone est requis et doit commencer par 06 ou 07 et contenir 10 chiffres.
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Adresse</label>
+          <input type="text" formControlName="streetAddress" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+          <div *ngIf="profileForm.get('streetAddress')?.invalid && profileForm.get('streetAddress')?.touched" class="text-red-600 text-sm">
+            Adresse est requise et doit être valide.
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Date de naissance</label>
+          <input type="date" formControlName="birthDate" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+          <div *ngIf="profileForm.get('birthDate')?.invalid && profileForm.get('birthDate')?.touched" class="text-red-600 text-sm">
+            Date de naissance est requise.
+          </div>
+        </div>
+        <div class="mt-4 flex justify-end">
+          <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Enregistrer</button>
+        </div>
+      </form>
     </div>
-    <form class="px-6 py-4 space-y-6" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Prénom</label>
-          <input type="text" formControlName="firstName" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Nom</label>
-          <input type="text" formControlName="lastName" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Email</label>
-          <input type="email" formControlName="email" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Téléphone</label>
-          <input type="tel" formControlName="phone" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
-        </div>
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Adresse</label>
-        <input type="text" formControlName="streetAddress" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Date de naissance</label>
-        <input type="date" formControlName="birthDate" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
-      </div>
-      <div class="pt-4">
-        <button type="submit" class="w-full py-3 px-4 rounded-lg bg-green-500 hover:bg-green-600 text-white text-lg font-bold shadow-md transition-all">
-          Sauvegarder
-        </button>
-      </div>
-    </form>
   </div>
 </div>

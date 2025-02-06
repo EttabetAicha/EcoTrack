@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { User } from '../../core/models/user.interface';
@@ -19,12 +19,12 @@ export class ProfileComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.profileForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      email: [''],
-      phone: [''],
-      streetAddress: [''],
-      birthDate: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^(06|07)\d{8}$/)]],
+      streetAddress: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9\s,]+$/)]],
+      birthDate: ['', Validators.required],
     });
   }
 
@@ -43,18 +43,16 @@ export class ProfileComponent implements OnInit {
       if (success) {
         Swal.fire({
           icon: 'success',
-          title: 'Registration Error',
+          title: 'Succès',
           text: 'Profil mis à jour avec succès',
         });
-      }
-      else{
+      } else {
         Swal.fire({
           icon: 'error',
-          title: 'Registration Error',
+          title: 'Erreur',
           text: 'Échec de la mise à jour du profil',
         });
       }
-    }    
-
+    }
   }
 }
