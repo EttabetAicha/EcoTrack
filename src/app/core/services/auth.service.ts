@@ -38,6 +38,7 @@ export class AuthService {
         userType: 'particular',
         createdAt: new Date().toISOString()
       };
+
       await this.http.post(this.API_URL, newUser).toPromise();
       return true;
     } catch (error) {

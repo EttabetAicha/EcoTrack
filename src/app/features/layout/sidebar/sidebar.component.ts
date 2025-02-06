@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { AuthService } from '../../../core/services/auth.service';
+import { Observable } from 'rxjs';
+import { User } from '../../../core/models/user.interface';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,7 +13,11 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class SidebarComponent {
   isSidebarOpen = true;
-  constructor(private sanitizer: DomSanitizer) {}
+  currentUser$: Observable<User | null>;
+  constructor(private sanitizer: DomSanitizer, private authService: AuthService) {
+    this.currentUser$ = this.authService.currentUser$;
+
+  }
   menuItems = [
     {
       icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -30,10 +37,6 @@ export class SidebarComponent {
     },
   ];
 
-  user = {
-    name: 'John Doe',
-    email: 'john@example.com',
-  };
   sanitizeSvg(icon: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(icon);
   }
