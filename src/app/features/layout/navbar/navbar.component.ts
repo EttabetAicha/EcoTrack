@@ -1,88 +1,87 @@
-// src/app/features/dashboard/components/navbar/navbar.component.ts
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+
+interface MenuItem {
+  icon: string;
+  label: string;
+  path: string;
+}
+
+interface Notification {
+  id: number;
+  text: string;
+  time: string;
+}
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
-  template: `
-    <nav class="bg-white shadow-sm fixed w-full z-10">
-      <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between h-16">
-          <!-- Left side -->
-          <div class="flex items-center">
-            <button (click)="toggleSidebar.emit()"
-                    class="text-gray-500 hover:text-gray-700 focus:outline-none">
-              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-            <span class="ml-4 text-xl font-semibold">RecycleHub</span>
-          </div>
-
-          <!-- Right side -->
-          <div class="flex items-center gap-4">
-            <!-- Notifications -->
-            <button class="p-2 hover:bg-gray-100 rounded-full">
-              <svg class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              </svg>
-            </button>
-
-            <!-- User dropdown -->
-            <div class="relative" [class.show]="isDropdownOpen">
-              <button (click)="toggleDropdown()"
-                      class="flex items-center focus:outline-none">
-                <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                  <img *ngIf="user?.profileImage" [src]="user.profileImage"
-                       [alt]="user.name" class="h-8 w-8 rounded-full">
-                  <svg *ngIf="!user?.profileImage" class="h-4 w-4 text-gray-500"
-                       fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-              </button>
-
-              <!-- Dropdown menu -->
-              <div *ngIf="isDropdownOpen"
-                   class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
-                <div class="px-4 py-2">
-                  <p class="text-sm font-medium text-gray-900">{{user?.name}}</p>
-                  <p class="text-sm text-gray-500">{{user?.email}}</p>
-                </div>
-                <a routerLink="/dashboard/profile"
-                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                  Edit Profile
-                </a>
-                <button (click)="logout()"
-                        class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
-                  Logout
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-  `
+  imports: [CommonModule],
+  templateUrl:"./navbar.component.html"
 })
-export class NavbarComponent {
-  @Input() user: any;
-  @Output() toggleSidebar = new EventEmitter<void>();
-
+export class DashboardLayoutComponent {
+  isSidebarOpen = true;
   isDropdownOpen = false;
+  isNotificationsOpen = false;
+
+  user = {
+    name: 'John Doe',
+    email: 'john@example.com',
+    profileImage: null,
+  };
+
+  notifications: Notification[] = [
+    { id: 1, text: 'New collection request received', time: '5 minutes ago' },
+    { id: 2, text: 'Points credited for last recycling', time: '1 hour ago' },
+    { id: 3, text: 'Weekly recycling report available', time: '2 hours ago' },
+  ];
+
+  menuItems: MenuItem[] = [
+    {
+      icon: `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>`,
+      label: 'Dashboard',
+      path: '/dashboard',
+    },
+    {
+      icon: `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>`,
+      label: 'Collection Requests',
+      path: '/dashboard/collections',
+    },
+    {
+      icon: `<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>`,
+      label: 'Points & Rewards',
+      path: '/dashboard/points',
+    },
+  ];
+
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
 
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
+    if (this.isDropdownOpen) {
+      this.isNotificationsOpen = false;
+    }
+  }
+
+  toggleNotifications(): void {
+    this.isNotificationsOpen = !this.isNotificationsOpen;
+    if (this.isNotificationsOpen) {
+      this.isDropdownOpen = false;
+    }
   }
 
   logout(): void {
-    // Implement logout logic
     console.log('Logging out...');
   }
 }
