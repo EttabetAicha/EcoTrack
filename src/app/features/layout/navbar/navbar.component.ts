@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { User } from '../../../core/models/user.interface';
 import { AuthService } from '../../../core/services/auth.service';
+import { RouterModule } from '@angular/router';
 
 interface MenuItem {
   icon: string;
@@ -19,7 +20,7 @@ interface Notification {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl:"./navbar.component.html"
 })
 export class DashboardLayoutComponent {
