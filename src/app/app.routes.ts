@@ -5,6 +5,8 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ProfileComponent } from './features/profile/profile.component';
+import { CollectorComponent } from './features/collector/collector.component';
+import { PointsComponent } from './features/points/points.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPage },
@@ -15,7 +17,11 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'profile', component: ProfileComponent }
+      { path: 'profile', component: ProfileComponent },
+      {path:'Collector-request',component:CollectorComponent},
+      {path:'points',component:PointsComponent},
+
+
     ]
   }
 ];
