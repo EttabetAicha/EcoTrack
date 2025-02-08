@@ -14,4 +14,5 @@ export interface User {
   profilePicture?: string;
   userType: 'particular' | 'collector';
   createdAt: string;
+  points?: number;
 }

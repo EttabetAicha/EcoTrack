@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
@@ -43,12 +43,26 @@ export class RegisterComponent {
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      streetAddress: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9\s,]+$/)]],
+      address: ['', [Validators.required, this.addressValidator]],
       phone: ['', [Validators.required, Validators.pattern(/^(06|07)\d{8}$/)]],
       birthDate: ['', Validators.required],
       profilePicture: [null]
     });
   }
+
+
+  private addressValidator(control: AbstractControl) {
+    const address = control.value;
+    if (typeof address !== 'string') {
+      return { invalidAddress: true };
+    }
+    const parts = address.split(',');
+    if (parts.length < 3) {
+      return { invalidAddress: true };
+    }
+    return null;
+  }
+
 
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -75,8 +89,28 @@ export class RegisterComponent {
     });
   }
 
+
   async onSubmit() {
     if (this.registerForm.valid) {
+      const addressValue = this.registerForm.get('address')?.value;
+      if (typeof addressValue === 'string') {
+        const parts = addressValue.split(',');
+        if (parts.length >= 3) {
+          const formattedAddress = {
+            street: parts[0].trim(),
+            postalCode: parts[1].trim(),
+            city: parts[2].trim()
+          };
+          this.registerForm.patchValue({ address: formattedAddress });
+        } else {
+          this.errorMessage = 'Invalid address format';
+          return;
+        }
+      } else {
+        this.errorMessage = 'Invalid address format';
+        return;
+      }
+
       const success = await this.authService.register(this.registerForm.value);
       if (success) {
         console.log('Registration successful');
@@ -86,7 +120,9 @@ export class RegisterComponent {
           icon: 'error',
           title: 'Registration Error',
           text: 'Email already in use',
-        });      }
+        });
+      }
     }
   }
+
 }

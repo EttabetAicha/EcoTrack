@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
+import { User } from '../../core/models/user.interface';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'landing-page',
@@ -44,7 +47,11 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class LandingPage implements OnInit {
   animationState = 'start';
+  currentUser$: Observable<User | null>;
 
+  constructor(private authService: AuthService) {
+    this.currentUser$ = this.authService.currentUser$;
+  }
   testimonials = [
   {
     name: "Alice Dupont",

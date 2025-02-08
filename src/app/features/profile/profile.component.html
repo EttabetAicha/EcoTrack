@@ -43,8 +43,8 @@
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Adresse</label>
-          <input type="text" formControlName="streetAddress" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
-          <div *ngIf="profileForm.get('streetAddress')?.invalid && profileForm.get('streetAddress')?.touched" class="text-red-600 text-sm">
+          <input type="text" formControlName="address" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+          <div *ngIf="profileForm.get('address')?.invalid && profileForm.get('address')?.touched" class="text-red-600 text-sm">
             Adresse est requise et doit être valide.
           </div>
         </div>
@@ -55,8 +55,9 @@
             Date de naissance est requise.
           </div>
         </div>
-        <div class="mt-4 flex justify-end">
-          <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Enregistrer</button>
+        <div class="mt-4 flex justify-end space-x-5">
+          <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-indigo-500">Enregistrer</button>
+          <button type="button" (click)="onDeleteProfile()" class="bg-red-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">supprimer mon compte</button>
         </div>
       </form>
     </div>
