@@ -60,8 +60,8 @@
       </div>
       <div>
         <label class="block text-sm font-medium text-gray-700">Adresse</label>
-        <input type="text" formControlName="streetAddress" placeholder="Rue , numéro , ville" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg text-gray-700 border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
-        <div [@errorState]="registerForm.get('streetAddress')?.invalid && registerForm.get('streetAddress')?.touched ? 'visible' : 'hidden'" class="text-red-600 text-sm">
+        <input type="text" formControlName="address" placeholder="Rue , numéro , ville" class="mt-1 px-3 py-2 block w-full h-10 rounded-lg text-gray-700 border-gray-300 shadow-sm focus:outline-none focus:ring-0" />
+        <div [@errorState]="registerForm.get('address')?.invalid && registerForm.get('address')?.touched ? 'visible' : 'hidden'" class="text-red-600 text-sm">
           Adresse est requis et doit être valide.
         </div>
       </div>
