@@ -6,7 +6,7 @@
       "lastName": "Odit aut amet iure ",
       "email": "sewimusut@mailinator.com",
       "password": "$2a$10$Z9b01WERzoJSH94irpRU5eEi47z3q.JHsm4QzQQacPkNzp84e.ALW",
-      "streetAddress": "Voluptas vel sunt et",
+      "address": "test,25888,safi",
       "phone": "+1 (364) 822-9227",
       "birthDate": "2003-04-22",
       "profilePicture": null,
@@ -19,7 +19,7 @@
       "lastName": "Perferendis placeat",
       "email": "vuxezutily@mailinator.com",
       "password": "$2a$10$oQHT6AJzn37rgyOQSqcb9.95KUhwCdm7PwuJVC4pQJv7Rlbirn//C",
-      "streetAddress": "Explicabo Amet lau",
+      "address": "Explicabo Amet lau",
       "phone": "+1 (867) 958-9121",
       "birthDate": "1982-07-16",
       "profilePicture": "3L3A1144.JPG",
@@ -28,15 +28,15 @@
     },
     {
       "id": "ece68174-ae91-4b2a-b5f2-fd5fac062dd5",
-      "firstName": "aicha",
+      "firstName": "salma",
       "lastName": "ettabet",
-      "email": "aicha@gmail.com",
+      "email": "salma@gmail.com",
       "password": "$2a$10$zBgzFBY7yU7JvJYjanx.n.Q8RCOlzaj3Ihqp7WdgA4.YTU6b.Gy/6",
-      "streetAddress": "23655,maroc,youssoufia",
+      "address": "23655,maroc,youssoufia",
       "phone": "0602125487",
       "birthDate": "2001-12-15",
       "profilePicture": "3L3A1146.JPG",
-      "userType": "particular",
+      "userType": "collector",
       "createdAt": "2025-02-05T11:13:51.411Z"
     },
     {
@@ -45,12 +45,113 @@
       "lastName": "ettabet",
       "email": "aicha@gmail.com",
       "password": "$2a$10$SFjnyl7fMngFxz7G3XgpXeuTiadYAV4LibwWBemsHpAVgdBU4hDnO",
-      "streetAddress": "maroc,258,youssoufia",
+      "address": "maroc,258,youssoufia",
       "phone": "0602125487",
       "birthDate": "2000-12-15",
       "profilePicture": "téléchargement (17).jpg",
       "userType": "particular",
       "createdAt": "2025-02-05T19:30:33.553Z"
+    },
+    {
+      "id": "460535b5-2939-4471-a911-b87525d7f6b3",
+      "firstName": "salma",
+      "lastName": "salimi",
+      "email": "hakima@gmail.com",
+      "password": "$2a$10$Q3dd9ZZoP3P/ejkrOb8TWOk1WfDTpkBqen5B2TwdGhoSwgmGbV2/C",
+      "address": {
+        "street": "tset",
+        "postalCode": "test",
+        "city": "youssoufia"
+      },
+      "phone": "0621548711",
+      "birthDate": "2000-11-24",
+      "profilePicture": null,
+      "userType": "collector",
+      "createdAt": "2025-02-08T19:47:44.919Z"
+    },
+    {
+      "id": "074d2e5d-bebb-44e6-b02e-6100188e9e50",
+      "firstName": "test",
+      "lastName": "tset",
+      "email": "test@gmail.com",
+      "password": "$2a$10$3yBTjf07WKq3AJHi0I.MMe.4gZNI9jLaHSG/aHnS9uSYahryK2xUO",
+      "address": {
+        "street": "tset",
+        "postalCode": "test",
+        "city": "youssoufia"
+      },
+      "phone": "0602125487",
+      "birthDate": "2008-10-15",
+      "profilePicture": null,
+      "userType": "collector",
+      "createdAt": "2025-02-08T21:13:45.845Z"
     }
+  ],
+  "collections": [
+    {
+      "id": "35af",
+      "wasteType": [
+        "verre",
+        "papier"
+      ],
+      "estimatedWeight": 1000,
+      "address": {
+        "street": "test",
+        "postalCode": "test",
+        "city": "safi"
+      },
+      "preferredDate": "2025-02-14T00:00:00.000Z",
+      "preferredTimeSlot": "15:15",
+      "additionalNotes": "shgdjsdsdsjgdjsgdhjsdjsgdjsgdjs",
+      "status": "pending",
+      "photos": [
+        "téléchargement (17).jpg"
+      ]
+    },
+    {
+      "id": "b941",
+      "wasteType": [
+        "verre",
+        "papier",
+        "metal"
+      ],
+      "estimatedWeight": 2008,
+      "address": {
+        "street": "test",
+        "postalCode": "test",
+        "city": "youssoufia"
+      },
+      "preferredDate": "2025-02-20T00:00:00.000Z",
+      "preferredTimeSlot": "17:26",
+      "additionalNotes": "hgsjdgjsgdjsdgsjdgsjdghsdjsdjhsgdj",
+      "status": "validated",
+      "photos": [
+        "téléchargement (17).jpg"
+      ]
+    },
+    {
+      "id": "449e",
+      "wasteType": [
+        "verre",
+        "papier",
+        "metal"
+      ],
+      "estimatedWeight": 1000,
+      "address": {
+        "street": "street",
+        "postalCode": "4888",
+        "city": "safi"
+      },
+      "preferredDate": "2025-02-12T00:00:00.000Z",
+      "preferredTimeSlot": "14:19",
+      "additionalNotes": "tet tsetsttr rstyrdsrtd yttrtrstrd",
+      "status": "pending",
+      "photos": [
+        "téléchargement (18).jpg"
+      ]
+    }
+  ],
+  "points": [
+
   ]
 }
