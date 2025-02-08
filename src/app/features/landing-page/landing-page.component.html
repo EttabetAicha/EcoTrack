@@ -6,13 +6,9 @@
 
     <!-- Image Slides -->
     <div class="relative w-full h-full">
-      <img
-        *ngFor="let image of heroImages; let i = index"
-        [src]="image"
-        alt="RecycleHub Background"
+      <img *ngFor="let image of heroImages; let i = index" [src]="image" alt="RecycleHub Background"
         class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-        [ngClass]="{ 'opacity-100': currentImageIndex === i, 'opacity-0': currentImageIndex !== i }"
-      />
+        [ngClass]="{ 'opacity-100': currentImageIndex === i, 'opacity-0': currentImageIndex !== i }" />
     </div>
   </div>
 
@@ -27,18 +23,21 @@
         <p class="text-xl mb-8" @fadeOutUp>
           Rejoignez notre communauté et participez à la préservation de l'environnement.
         </p>
-        <div class="space-x-4">
-          <button
-            [routerLink]="['/register']"
+        <div class="space-x-4" *ngIf="currentUser$ | async as user">
+          <button *ngIf="!user.id" [routerLink]="['/register']"
             class="bg-green-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-green-700 transition duration-300"
-            [@zoomUpDown]="animationState"
-          >
+            [@zoomUpDown]="animationState">
             S'inscrire
           </button>
+          <button *ngIf="user.id" [routerLink]="['/particular/dashboard']"
+            class="bg-green-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-green-700 transition duration-300"
+            [@zoomUpDown]="animationState">
+            Tableau de bord
+          </button>
+
           <button
             class="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white/10 transition duration-300"
-            [@zoomUpDown]="animationState"
-          >
+            [@zoomUpDown]="animationState">
             En savoir plus
           </button>
         </div>
@@ -47,11 +46,8 @@
       <!-- Right Section: Animated Image -->
       <div class="hidden md:block">
         <div class="rounded-xl overflow-hidden shadow-2xl transform transition-all duration-700 hover:scale-105">
-          <img
-            [src]="currentHeroImage"
-            alt="Recycling Illustration"
-            class="w-full h-[500px] object-cover animate-scale-in"
-          />
+          <img [src]="currentHeroImage" alt="Recycling Illustration"
+            class="w-full h-[500px] object-cover animate-scale-in" />
         </div>
       </div>
     </div>
@@ -66,26 +62,12 @@
     </h2>
 
     <div class="grid md:grid-cols-3 gap-8">
-      <div
-        *ngFor="let feature of features"
-        (mouseenter)="toggleFeatureState('hover')"
-        (mouseleave)="toggleFeatureState('normal')"
-        [@cardHover]="currentFeatureState"
-        class="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:shadow-2xl"
-      >
+      <div *ngFor="let feature of features" (mouseenter)="toggleFeatureState('hover')"
+        (mouseleave)="toggleFeatureState('normal')" [@cardHover]="currentFeatureState"
+        class="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:shadow-2xl">
         <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-          <svg
-            class="w-8 h-8 text-green-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              [attr.d]="feature.icon"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path [attr.d]="feature.icon" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </div>
 
@@ -98,11 +80,7 @@
         </p>
 
         <div class="mt-4">
-          <img
-            [src]="feature.image"
-            alt="{{ feature.title }}"
-            class="w-full h-48 object-cover rounded-md"
-          />
+          <img [src]="feature.image" alt="{{ feature.title }}" class="w-full h-48 object-cover rounded-md" />
         </div>
       </div>
     </div>
@@ -160,18 +138,23 @@
       <form>
         <div class="mb-6">
           <label for="name" class="block text-gray-700 font-semibold mb-2">Nom</label>
-          <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" required>
+          <input type="text" id="name"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" required>
         </div>
         <div class="mb-6">
           <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
-          <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" required>
+          <input type="email" id="email"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" required>
         </div>
         <div class="mb-6">
           <label for="message" class="block text-gray-700 font-semibold mb-2">Message</label>
-          <textarea id="message" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" rows="4" required></textarea>
+          <textarea id="message"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" rows="4"
+            required></textarea>
         </div>
         <div class="text-center">
-          <button type="submit" class="bg-green-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-green-700 transition duration-300">
+          <button type="submit"
+            class="bg-green-600 text-white px-8 py-3 rounded-full shadow-lg hover:bg-green-700 transition duration-300">
             Envoyer
           </button>
         </div>
@@ -186,4 +169,3 @@
     <p class="text-gray-400">&copy; 2023 EcoTrack. Tous droits réservés.</p>
   </div>
 </footer>
-
