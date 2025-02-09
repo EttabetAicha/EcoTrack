@@ -26,6 +26,10 @@
             placeholder="votreemail@exemple.com"
           />
         </div>
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-600 text-sm">
+          <small *ngIf="loginForm.get('email')?.errors?.['required']">Email est requis.</small>
+          <small *ngIf="loginForm.get('email')?.errors?.['email']">Format d'email invalide.</small>
+        </div>
       </div>
 
       <!-- Password Field -->
@@ -43,6 +47,9 @@
             class="pl-10 block w-full h-12 rounded-lg border-gray-300 focus:ring-green-500 focus:border-green-500"
             placeholder="••••••••"
           />
+        </div>
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-600 text-sm">
+          <small *ngIf="loginForm.get('password')?.errors?.['required']">Mot de passe est requis.</small>
         </div>
       </div>
 

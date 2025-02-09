@@ -11,7 +11,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { User } from '../../core/models/user.interface';
 import Swal from 'sweetalert2';
 import { CollectorReqEditModalComponent } from './collecto-req-modals/collector-req-edit-modal.component';
-
+import * as AuthActions from '../../state/actions/auth.actions';
 @Component({
   selector: 'app-collector',
   templateUrl: './collector.component.html',
@@ -77,9 +77,45 @@ export class CollectorComponent implements OnInit {
   }
 
   updateRequestStatus(request: CollectionRequest, status: 'pending' | 'occupied' | 'in_progress' | 'validated' | 'rejected'): void {
-    this.onUpdate({ ...request, status });
-  }
+    const updatedRequest = { ...request, status };
 
+    if (status === 'validated') {
+      const calculatedPoints = this.authService.calculatePoints(
+        request.wasteType,
+        request.estimatedWeight
+      );
+      const requestWithPoints = {
+        ...updatedRequest,
+        points: calculatedPoints
+      };
+
+      this.store.dispatch(CollectionActions.updateRequest({
+        request: requestWithPoints
+      }));
+      this.currentUser$.subscribe(user => {
+        if (user) {
+          this.store.dispatch(AuthActions.addPointsAfterCollection({
+            userId: user.id,
+            wasteTypes: request.wasteType,
+            weight: request.estimatedWeight
+          }));
+        }
+      });
+
+      // Show success message
+      Swal.fire({
+        title: 'Collection Validated',
+        text: `${calculatedPoints} points have been added to the user's account.`,
+        icon: 'success',
+        confirmButtonColor: '#3085d6'
+      });
+    } else {
+      // For other status updates, just update the request
+      this.store.dispatch(CollectionActions.updateRequest({
+        request: updatedRequest
+      }));
+    }
+  }
   openCollectionRequestDialog(): void {
     const dialogRef = this.dialog.open(CollectionRequestDialogComponent, {
       width: '600px',

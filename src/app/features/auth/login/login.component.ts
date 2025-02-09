@@ -23,15 +23,18 @@ export class LoginComponent {
     });
   }
 
-  async onSubmit() {
+  onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      const success = await this.authService.login(email, password);
-      if (success) {
-        this.router.navigate(['/particular/dashboard']);
-      } else {
-        this.loginError = 'Invalid email or password. Please try again.';
-      }
+      this.authService.login(email, password).subscribe(success => {
+        if (success) {
+          this.router.navigate(['/particular/dashboard']);
+        } else {
+          this.loginError = 'Invalid email or password. Please try again.';
+        }
+      });
+    } else {
+      this.loginForm.markAllAsTouched(); 
     }
   }
 }

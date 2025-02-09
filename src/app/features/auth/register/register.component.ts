@@ -50,7 +50,6 @@ export class RegisterComponent {
     });
   }
 
-
   private addressValidator(control: AbstractControl) {
     const address = control.value;
     if (typeof address !== 'string') {
@@ -62,7 +61,6 @@ export class RegisterComponent {
     }
     return null;
   }
-
 
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -89,9 +87,10 @@ export class RegisterComponent {
     });
   }
 
-
-  async onSubmit() {
+  onSubmit() {
+    console.log('Form submitted');
     if (this.registerForm.valid) {
+      console.log('Form is valid');
       const addressValue = this.registerForm.get('address')?.value;
       if (typeof addressValue === 'string') {
         const parts = addressValue.split(',');
@@ -111,18 +110,21 @@ export class RegisterComponent {
         return;
       }
 
-      const success = await this.authService.register(this.registerForm.value);
-      if (success) {
-        console.log('Registration successful');
-        this.router.navigate(['/login']);
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Registration Error',
-          text: 'Email already in use',
-        });
-      }
+      console.log('Calling register service');
+      this.authService.register(this.registerForm.value).subscribe(success => {
+        if (success) {
+          console.log('Registration successful');
+          this.router.navigate(['/login']);
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration Error',
+            text: 'Email already in use',
+          });
+        }
+      });
+    } else {
+      console.log('Form is invalid');
     }
   }
-
 }

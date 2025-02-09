@@ -1,38 +1,48 @@
 import { createAction, props } from '@ngrx/store';
+import { User } from '../../core/models/user.interface';
+import { CollectionRequest } from '../../core/models/CollectionRequest.interface';
 
-export const login = createAction('[Auth] Login', props<{ email: string; password: string }>());
-export const loginSuccess = createAction('[Auth] Login Success', props<{ user: any }>());
-export const loginFailure = createAction('[Auth] Login Failure', props<{ error: any }>());
+export const addPointsAfterCollection = createAction(
+  '[Auth] Add Points After Collection',
+  props<{ userId: string; wasteTypes: string[]; weight: number }>()
+);
+export const updateUser = createAction(
+  '[Auth] Update User',
+  props<{ user: User }>()
+);
 
-export const register = createAction('[Auth] Register', props<{ user: any }>());
-export const registerSuccess = createAction('[Auth] Register Success', props<{ user: any }>());
-export const registerFailure = createAction('[Auth] Register Failure', props<{ error: any }>());
-export const addPoints = createAction(
-  '[User] Add Points',
-  props<{ userId: string, points: number }>()
+
+export const updateUserSuccess = createAction(
+  '[Auth] Update User Success',
+  props<{ user: User }>()
+);
+
+export const updateUserFailure = createAction(
+  '[Auth] Update User Failure',
+  props<{ error: any }>()
 );
 
 export const addPointsSuccess = createAction(
-  '[User] Add Points Success',
-  props<{ userId: string, points: number }>()
+  '[Auth] Add Points Success',
+  props<{ user: User }>()
 );
 
 export const addPointsFailure = createAction(
-  '[User] Add Points Failure',
-  props<{ error: any }>()
+  '[Auth] Add Points Failure',
+  props<{ error: string }>()
 );
 
 export const convertPoints = createAction(
-  '[User] Convert Points',
-  props<{ userId: string, points: number }>()
+  '[Auth] Convert Points',
+  props<{ points: number; collectionRequest: CollectionRequest }>()
 );
 
 export const convertPointsSuccess = createAction(
-  '[User] Convert Points Success',
-  props<{ userId: string, points: number, voucher: string }>()
+  '[Auth] Convert Points Success',
+  props<{ collectionRequest: CollectionRequest; voucher: string }>()
 );
 
 export const convertPointsFailure = createAction(
-  '[User] Convert Points Failure',
-  props<{ error: any }>()
+  '[Auth] Convert Points Failure',
+  props<{ error: string }>()
 );

@@ -327,7 +327,7 @@ export class CollectionRequestDialogComponent {
       const inputDate = new Date(control.value);
       return inputDate >= today ? null : { pastDate: true };
     };
-  } 
+  }
 
   private timeSlotValidator() {
     return (control: AbstractControl) => {
@@ -438,7 +438,8 @@ export class CollectionRequestDialogComponent {
         preferredTimeSlot: this.collectionForm.get('preferredTimeSlot')?.value,
         additionalNotes: this.collectionForm.get('additionalNotes')?.value || '',
         status: 'pending',
-        photos: this.selectedFiles.map(file => file.name)
+        photos: this.selectedFiles.map(file => file.name),
+        userId: this.currentUser?.id || '' 
       };
 
       console.log('Transformed request:', formData);

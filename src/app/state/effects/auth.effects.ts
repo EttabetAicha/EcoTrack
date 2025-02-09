@@ -1,22 +1,39 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
 import { AuthService } from '../../core/services/auth.service';
 import * as AuthActions from '../actions/auth.actions';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
-  private actions$ = inject(Actions);
-  private authService = inject(AuthService);
-
-  addPoints$ = createEffect(() =>
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService
+  ) {}
+  updateUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.addPoints),
+      ofType(AuthActions.updateUser),
       mergeMap(action =>
-        this.authService.addPoints(action.userId, action.points).pipe(
-          map(() => AuthActions.addPointsSuccess({ userId: action.userId, points: action.points })),
-          catchError(error => of(AuthActions.addPointsFailure({ error })))
+        this.authService.updateProfile(action.user).pipe(
+          map(() => AuthActions.updateUserSuccess({ user: action.user })),
+          catchError(error => of(AuthActions.updateUserFailure({ error })))
+        )
+      )
+    )
+  );
+
+  addPointsAfterCollection$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.addPointsAfterCollection),
+      mergeMap(action =>
+        this.authService.addPointsAfterCollection(
+          action.userId,
+          action.wasteTypes,
+          action.weight
+        ).pipe(
+          map(user => AuthActions.addPointsSuccess({ user })),
+          catchError(error => of(AuthActions.addPointsFailure({ error: error.message })))
         )
       )
     )
@@ -26,13 +43,12 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.convertPoints),
       mergeMap(action =>
-        this.authService.convertPoints(action.userId, action.points).pipe(
-          map(result =>
-            result.success
-              ? AuthActions.convertPointsSuccess({ userId: action.userId, points: action.points, voucher: result.voucher })
-              : AuthActions.convertPointsFailure({ error: 'Conversion failed' })
-          ),
-          catchError(error => of(AuthActions.convertPointsFailure({ error })))
+        this.authService.convertPoints(action.points, action.collectionRequest).pipe(
+          map(result => AuthActions.convertPointsSuccess({
+            collectionRequest: result.collectionRequest,
+            voucher: result.voucher
+          })),
+          catchError(error => of(AuthActions.convertPointsFailure({ error: error.message })))
         )
       )
     )

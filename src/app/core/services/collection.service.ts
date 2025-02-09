@@ -34,7 +34,15 @@ export class CollectionService {
   getRequestsByCity(city: string): Observable<CollectionRequest[]> {
     return this.http.get<CollectionRequest[]>(`${this.apiUrl}?city=${city}`);
   }
-
+  getCurrentCollectionRequest(): Observable<CollectionRequest | null> {
+    const currentUser = this.authService.currentUserSubject.value;
+    if (!currentUser) {
+      return of(null);
+    }
+    return this.http.get<CollectionRequest[]>(`${this.apiUrl}?userId=${currentUser.id}`).pipe(
+      map(requests => requests.find(request => request.status === 'pending') || null)
+    );
+  }
 
   uploadFile(file: File): Observable<{ filePath: string }> {
     const formData = new FormData();

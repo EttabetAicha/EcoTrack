@@ -85,6 +85,23 @@
       "profilePicture": null,
       "userType": "collector",
       "createdAt": "2025-02-08T21:13:45.845Z"
+    },
+    {
+      "id": "103ca77e-53ea-4567-9cb0-b818440b76cb",
+      "firstName": "amine",
+      "lastName": "amine",
+      "email": "amine@gmail.com",
+      "password": "$2a$10$bvyMWEpA2vQ/K0yEmJdKZO8qGz/EpfH3A/1RR9d4UIfJXJy/7ZbBm",
+      "address": {
+        "street": "street",
+        "postalCode": "4568",
+        "city": "safi"
+      },
+      "phone": "0602125487",
+      "birthDate": "2008-06-18",
+      "profilePicture": null,
+      "userType": "particular",
+      "createdAt": "2025-02-09T18:07:14.514Z"
     }
   ],
   "collections": [
@@ -102,11 +119,12 @@
       },
       "preferredDate": "2025-02-14T00:00:00.000Z",
       "preferredTimeSlot": "15:15",
-      "additionalNotes": "shgdjsdsdsjgdjsgdhjsdjsgdjsgdjs",
+      "additionalNotes": "cooooooooooooooool",
       "status": "pending",
       "photos": [
         "téléchargement (17).jpg"
-      ]
+      ],
+      "points": -1200
     },
     {
       "id": "b941",
@@ -127,7 +145,8 @@
       "status": "validated",
       "photos": [
         "téléchargement (17).jpg"
-      ]
+      ],
+      "points": 2000
     },
     {
       "id": "449e",
@@ -149,9 +168,47 @@
       "photos": [
         "téléchargement (18).jpg"
       ]
+    },
+    {
+      "id": "c939",
+      "wasteType": [
+        "plastique"
+      ],
+      "estimatedWeight": 1000,
+      "address": {
+        "street": "street",
+        "postalCode": "1254",
+        "city": "youssoufia"
+      },
+      "preferredDate": "2025-02-11T00:00:00.000Z",
+      "preferredTimeSlot": "09:20",
+      "additionalNotes": "testtestetesesteseseseestesets",
+      "status": "validated",
+      "photos": [
+        "evgeny-karchevsky-k1tUxfs8JYY-unsplash.jpg"
+      ],
+      "userId": "90aea4d8-8899-4354-95eb-6ad7dba2a272",
+      "points": 2000
+    },
+    {
+      "id": "203a",
+      "wasteType": [
+        "plastique"
+      ],
+      "estimatedWeight": 1000,
+      "address": {
+        "street": "street",
+        "postalCode": "1254",
+        "city": "youssoufia"
+      },
+      "preferredDate": "2025-02-11T00:00:00.000Z",
+      "preferredTimeSlot": "09:20",
+      "additionalNotes": "testtestetesesteseseseestesets",
+      "status": "pending",
+      "photos": [
+        "evgeny-karchevsky-k1tUxfs8JYY-unsplash.jpg"
+      ],
+      "userId": "90aea4d8-8899-4354-95eb-6ad7dba2a272"
     }
-  ],
-  "points": [
-
   ]
 }

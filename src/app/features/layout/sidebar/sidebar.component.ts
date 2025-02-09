@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { AuthService } from '../../../core/services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { User } from '../../../core/models/user.interface';
 import { RouterModule } from '@angular/router';
 
@@ -37,6 +37,15 @@ export class SidebarComponent {
       path: '/particular/dashboard/points',
     },
   ];
+  getFilteredMenuItems(): any[] {
+    let filteredMenuItems = this.menuItems;
+    this.currentUser$.pipe(take(1)).subscribe(user => {
+      if (user && user.userType === 'collector') {
+        filteredMenuItems = this.menuItems.filter(item => item.label !== 'Points et récompenses');
+      }
+    });
+    return filteredMenuItems;
+  }
 
   sanitizeSvg(icon: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(icon);

@@ -1,5 +1,6 @@
 export interface CollectionRequest {
   id?: number;
+  userId: string;
   wasteType: ('plastique' | 'verre' | 'papier' | 'metal')[];
   photos?: string[];
   estimatedWeight: number;
@@ -12,4 +13,6 @@ export interface CollectionRequest {
   preferredTimeSlot: string;
   additionalNotes?: string;
   status: 'pending' | 'occupied' | 'in_progress' | 'validated' | 'rejected';
+  points?: number;
+
 }
